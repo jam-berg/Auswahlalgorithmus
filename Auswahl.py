@@ -67,9 +67,10 @@ def Epsilon(list):
     return epsilon
 
 def pooling(constellation):
-
+    
+    backup = constellation.copy()
     for i in range(Iterations):
-        backup = constellation.copy()
+        constellation = []
         constellation = Assign()
 
         epsilon_before = Epsilon(backup)
@@ -77,7 +78,7 @@ def pooling(constellation):
         epsilon_after = Epsilon(constellation)
 
         if epsilon_after > epsilon_before:
-                constellation = backup
+                backup = constellation
 
     return constellation
 
@@ -129,6 +130,6 @@ print("Calculated expected Value: ", max(epsilons))
 print("highest theoretical Value: ", teams*4)
 
 fig, ax = plt.subplots()
-fig.plot(epsilons,color = "pink")
+plt.plot(epsilons,color = "pink")
 fig.legend()
 plt.show()
