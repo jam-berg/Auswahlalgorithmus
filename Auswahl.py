@@ -114,7 +114,7 @@ def solver(constellation):
         epsilon_before = Epsilon(backup)
         epsilons_solver.append(epsilon_before)
 
-        rand = np.random.randint(1,projects)
+        rand = np.random.randint(1,projects+1)
         if not rand in backup:
             backup[np.random.randint(0,teams)] = rand                 # replacing elements
 
