@@ -104,7 +104,7 @@ def solver(constellation):
         if epsilon_after > epsilon_before:
             constellation = backup
 
-        '''
+            
         
         backup = constellation.copy()
 
@@ -118,10 +118,7 @@ def solver(constellation):
         epsilon_after = Epsilon(backup)
     
         if epsilon_after > epsilon_before:
-            constellation = backup 
-        
-        '''
-    
+            constellation = backup
     return constellation
 
 constellation = Assign()
@@ -132,6 +129,6 @@ print("Calculated expected Value: ", max(epsilons))
 print("highest theoretical Value: ", teams*4)
 
 fig, ax = plt.subplots()
-plt.plot(epsilons,color = "pink")
-plt.legend()
+fig.plot(epsilons,color = "pink")
+fig.legend()
 plt.show()
