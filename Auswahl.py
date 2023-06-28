@@ -6,7 +6,7 @@ import copy
 
 ## 4 for "Sehr gerne" 2 for "gerne"  0 for "egal" -2 for "nicht gerne" -6 for "gar nicht gerne"
 
-teams = 18
+teams = 15
 projects = 15
 Iterations = 1000
 
@@ -31,9 +31,6 @@ groups =[
 , {"1": 0 ,"2": 0 ,"3": 6 ,"4": 0 ,"5": 0 ,"6":  0,"7": 0 ,"8": 2 ,"9": 0 ,"10": 0 ,"11": 0 ,"12": 0 ,"13": 0 ,"14": 0 ,"15": 4 }
 , {"1": 2 ,"2": 0 ,"3": 0 ,"4": 4 ,"5": 0 ,"6":  0,"7": 0 ,"8": 6 ,"9": 0 ,"10": 0 ,"11": 0 ,"12": 0 ,"13": 0 ,"14": 0 ,"15": 0 }
 , {"1": 0 ,"2": 0 ,"3": 0 ,"4": 0 ,"5": 0 ,"6":  0,"7": 0 ,"8": 0 ,"9": 0 ,"10": 0 ,"11": 0 ,"12": 0 ,"13": 0 ,"14": 0 ,"15": 6 }
-, {"1": 2 ,"2": 0 ,"3": 4 ,"4": 0 ,"5": 0 ,"6":  0,"7": 0 ,"8": 0 ,"9": 0 ,"10": 0 ,"11": 0 ,"12": 0 ,"13": 0 ,"14": 0 ,"15": 6 }
-, {"1": 0 ,"2": 2 ,"3": 6 ,"4": 0 ,"5": 0 ,"6":  0,"7": 0 ,"8": 0 ,"9": 0 ,"10": 0 ,"11": 0 ,"12": 0 ,"13": 0 ,"14": 0 ,"15": 4 }
-, {"1": 0 ,"2": 2 ,"3": 6 ,"4": 0 ,"5": 0 ,"6":  0,"7": 0 ,"8": 0 ,"9": 0 ,"10": 0 ,"11": 0 ,"12": 0 ,"13": 0 ,"14": 0 ,"15": 4 }
 ]
 
 
@@ -69,6 +66,23 @@ def Epsilon(list):
         epsilon += groups[i][str(list[i])]
     return epsilon
 
+def pooling(constellation):
+
+    for i in range(Iterations):
+        backup = constellation.copy()
+        constellation = Assign()
+
+        epsilon_before = Epsilon(backup)
+        epsilons.append(epsilon_before)
+        epsilon_after = Epsilon(constellation)
+
+        if epsilon_after > epsilon_before:
+                constellation = backup
+
+    return constellation
+
+    
+
 
 def solver(constellation):
 
@@ -90,7 +104,7 @@ def solver(constellation):
         if epsilon_after > epsilon_before:
             constellation = backup
 
-            
+        '''
         
         backup = constellation.copy()
 
@@ -104,16 +118,20 @@ def solver(constellation):
         epsilon_after = Epsilon(backup)
     
         if epsilon_after > epsilon_before:
-            constellation = backup
+            constellation = backup 
+        
+        '''
+    
     return constellation
 
 constellation = Assign()
 
-print("Found Constellation: ", solver(constellation))
+#print("Found Constellation: ", solver(constellation))
+print("Found Constellation: ", pooling(constellation))
 print("Calculated expected Value: ", max(epsilons))
 print("highest theoretical Value: ", teams*4)
 
 fig, ax = plt.subplots()
-fig.plot(epsilons,color = "pink")
-fig.legend()
+plt.plot(epsilons,color = "pink")
+plt.legend()
 plt.show()
