@@ -71,7 +71,11 @@ print("Found Constellation: ", solver(constellation))
 print("Calculated expected Value: ", max(epsilons))
 print("highest theoretical Value: ", group_count*4)
 
-
+result_string = ""
+for i in range(len(constellation)):
+    result_string += "Gruppe " + str(groups[i]) + " macht Projekt " + str(constellation[i]) + '\n'
+with open('resulting_constellation.txt', 'w') as f:
+    f.write(result_string)
 
 fig, ax = plt.subplots()
 plt.plot(epsilons,color = "pink", label = "solver")
