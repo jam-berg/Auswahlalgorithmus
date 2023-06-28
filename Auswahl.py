@@ -8,10 +8,11 @@ import copy
 
 teams = 15
 projects = 15
-Iterations = 1000
+Iterations = 1000000
 
 constellation = []
 epsilons = []
+epsilons_solver =[]
 
 
 
@@ -93,7 +94,7 @@ def solver(constellation):
         backup = constellation.copy()
 
         epsilon_before = Epsilon(backup)
-        epsilons.append(epsilon_before)
+        epsilons_solver.append(epsilon_before)
 
         element1 = np.random.randint(0,teams)
         element2  = np.random.randint(0,teams)
@@ -111,7 +112,7 @@ def solver(constellation):
         backup = constellation.copy()
 
         epsilon_before = Epsilon(backup)
-        epsilons.append(epsilon_before)
+        epsilons_solver.append(epsilon_before)
 
         rand = np.random.randint(1,projects)
         if not rand in backup:
@@ -125,12 +126,13 @@ def solver(constellation):
 
 constellation = Assign()
 
-#print("Found Constellation: ", solver(constellation))
+print("Found Constellation: ", solver(constellation))
 print("Found Constellation: ", pooling(constellation))
 print("Calculated expected Value: ", max(epsilons))
 print("highest theoretical Value: ", teams*4)
 
 fig, ax = plt.subplots()
-plt.plot(epsilons,color = "pink")
+ax.plot(epsilons,color = "pink", label = "pooling")
+ax.plot(epsilons_solver, label = "solver")
 fig.legend()
 plt.show()
