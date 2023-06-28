@@ -53,12 +53,13 @@ group16 = {"1": 2 ,"2": 0 ,"3": 4 ,"4": 0 ,"5": 0 ,"6":  0,"7": 0 ,"8": 0 ,"9": 
 group17 = {"1": 0 ,"2": 2 ,"3": 6 ,"4": 0 ,"5": 0 ,"6":  0,"7": 0 ,"8": 0 ,"9": 0 ,"10": 0 ,"11": 0 ,"12": 0 ,"13": 0 ,"14": 0 ,"15": 4 }
 group18 = {"1": 0 ,"2": 2 ,"3": 6 ,"4": 0 ,"5": 0 ,"6":  0,"7": 0 ,"8": 0 ,"9": 0 ,"10": 0 ,"11": 0 ,"12": 0 ,"13": 0 ,"14": 0 ,"15": 4 }
  
-def Assign(): 
-    while len(constellation) != teams: 
+def Assign():
+    assignment = []
+    while len(assignment) != teams: 
         current = np.random.randint (1,projects+1)
-        if not current in constellation: 
-            constellation.append(current)
-    return constellation
+        if not current in assignment: 
+            assignment.append(current)
+    return assignment 
 
 def Epsilon(list):
     epsilon = 0
