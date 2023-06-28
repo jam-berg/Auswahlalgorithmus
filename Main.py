@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-Iterations = 1000
+Iterations = 2000
 
 csv_file = pd.read_csv('InputProjektePräferenz.csv')
 praeferenzen = csv_file.iloc[:, 1:]
@@ -74,6 +74,7 @@ print("highest theoretical Value: ", group_count*4)
 result_string = ""
 for i in range(len(constellation)):
     result_string += "Gruppe " + str(groups[i]) + " macht Projekt " + str(constellation[i]) + '\n'
+result_string += 'Zufriedenheitswert' + str(max(epsilons))
 with open('resulting_constellation.txt', 'w') as f:
     f.write(result_string)
 
