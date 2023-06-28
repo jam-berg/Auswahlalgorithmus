@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 Iterations = 2000
 
 csv_file = pd.read_csv('InputProjektePräferenz.csv')
+groups = csv_file.iloc[:,:1]['Gruppe'].values.tolist()
 praeferenzen = csv_file.iloc[:, 1:]
 project_count= len(praeferenzen.columns)
 group_count = len(praeferenzen.index)
 projects = list(map(str, range(1,project_count+1)))
-groups = range(1,group_count+1)
 
 groups_choice = []
 for index, row in praeferenzen.iterrows():
@@ -73,7 +73,7 @@ print("highest theoretical Value: ", group_count*4)
 
 result_string = ""
 for i in range(len(constellation)):
-    result_string += "Gruppe " + str(groups[i]) + " macht Projekt " + str(constellation[i]) + '\n'
+    result_string += "Gruppe " + groups[i] + " macht Projekt " + str(constellation[i]) + '\n'
 result_string += 'Zufriedenheitswert' + str(max(epsilons))
 with open('resulting_constellation.txt', 'w') as f:
     f.write(result_string)

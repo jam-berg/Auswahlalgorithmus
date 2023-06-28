@@ -1,16 +1,17 @@
-Gruppe 1 macht Projekt 13
-Gruppe 2 macht Projekt 15
-Gruppe 3 macht Projekt 1
-Gruppe 4 macht Projekt 6
-Gruppe 5 macht Projekt 12
-Gruppe 6 macht Projekt 16
-Gruppe 7 macht Projekt 7
-Gruppe 8 macht Projekt 4
-Gruppe 9 macht Projekt 5
-Gruppe 10 macht Projekt 2
-Gruppe 11 macht Projekt 10
-Gruppe 12 macht Projekt 14
-Gruppe 13 macht Projekt 8
-Gruppe 14 macht Projekt 3
-Gruppe 15 macht Projekt 11
-Gruppe 16 macht Projekt 9
+Gruppe Gruppe 1 macht Projekt 6
+Gruppe Gruppe 2 macht Projekt 2
+Gruppe Gruppe 3 macht Projekt 12
+Gruppe Gruppe 4 macht Projekt 13
+Gruppe Gruppe 5 macht Projekt 7
+Gruppe Gruppe 6 macht Projekt 11
+Gruppe Gruppe 7 macht Projekt 3
+Gruppe Gruppe 8 macht Projekt 16
+Gruppe Gruppe 9 macht Projekt 4
+Gruppe Gruppe 10 macht Projekt 1
+Gruppe Gruppe 11 macht Projekt 15
+Gruppe Gruppe 12 macht Projekt 14
+Gruppe Gruppe 13 macht Projekt 10
+Gruppe Gruppe 14 macht Projekt 9
+Gruppe Gruppe 15 macht Projekt 8
+Gruppe Gruppe 16 macht Projekt 5
+Zufriedenheitswert23
