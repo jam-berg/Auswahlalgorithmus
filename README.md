@@ -5,6 +5,10 @@ Dieses Program dient dazu die Gruppen möglichst fair zuzuteilen, damit es im Du
 ## Verwendung
 Als erstes werden die Präferenzen der Gruppen in das InputProjektePräferenz.csv eingetragen. Darin kann auch die Anzahl der Gruppen und Projekte ergänzt oder verringert werden. 
 Anschliessend wird das Main.py Skript ausgeführt. Danach werden die Resultate in der Konsole ausgegeben und werden im resulting_constellation.txt Textfile gespeichert.   
+Kurzform: 
+1. Präferenzen in InputProjektePräferenz.csv eintragen
+2. Main.py ausführen
+3. Werte aus resulting_constellation.txt auslesen
 
 ## Modifizierung
 Im Python Skript kann die Anzahl der Iterationen angepasst werden, was aber auch die Laufzeit erhöht.
