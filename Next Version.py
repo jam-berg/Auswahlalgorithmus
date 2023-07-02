@@ -14,6 +14,7 @@ treshold = 33
 constellation = []
 epsilons = []
 epsilons_solver =[]
+trials = 25
 
 
 
@@ -197,18 +198,32 @@ def solver(constellation):
     
         if epsilon_after > epsilon_before:
             constellation = backup
-    return constellation
+    return constellation, epsilon_after
 
-constellation = Assign()
-#print(evaluate())
-print(grouping())
+def Iterate():
+    epsilon_results = []
+    constellation_results = []
+       
+    for i in range(trials): 
+        constellation = Assign()
+        epsilon_results.append(solver(constellation)[1])
+        constellation_results.append(solver(constellation)[0])
+        print(constellation_results)
+    return max(epsilon_results), constellation_results[epsilon_results.index(max(epsilon_results))]
+
+
+print(Iterate())
 '''
+constellation = Assign()
+print(evaluate())
+print(grouping())
+
+
 print("Found Constellation: ", solver(constellation))
 print("Found Constellation: ", pooling(constellation))
 print("Calculated expected Value: ", max(epsilons_solver))
 print("highest theoretical Value: ", teams*4)
-'''
-'''
+
 fig, ax = plt.subplots()
 ax.plot(epsilons,color = "pink", label = "pooling")
 ax.plot(epsilons_solver, label = "solver")
