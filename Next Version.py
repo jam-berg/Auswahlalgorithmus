@@ -9,12 +9,11 @@ import copy
 teams = 15
 projects = 15
 Iterations = 10000
-treshold = 33
-
+treshold = 10
 constellation = []
 epsilons = []
 epsilons_solver =[]
-trials = 25
+trials = 12
 
 
 
@@ -86,7 +85,7 @@ def evaluate():
                         counter += 1
                 match_index.append(counter)
                 key.append([k,i])
-    return match_index, key
+    return match_index, key, 
                 
 def grouping(): 
     matches, key = evaluate()
@@ -124,11 +123,7 @@ def grouping():
         if np.all(Bool1) == True and backup[i][1] not in lonely_people:
                 lonely_people.append(backup[i][1]) 
 
-    return lonely_people, new_groups
-
-            
-
-            
+    return lonely_people, new_groups, groups             
 
 def Assign():
     assignment = []
@@ -203,12 +198,13 @@ def solver(constellation):
 def Iterate():
     epsilon_results = []
     constellation_results = []
-       
+    lonely_people, new_groups, groups = grouping()
+
     for i in range(trials): 
         constellation = Assign()
-        epsilon_results.append(solver(constellation)[1])
-        constellation_results.append(solver(constellation)[0])
-        print(constellation_results)
+        const,epsil = solver(constellation)
+        epsilon_results.append(epsil)
+        constellation_results.append(const)
     return max(epsilon_results), constellation_results[epsilon_results.index(max(epsilon_results))]
 
 
