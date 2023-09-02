@@ -7,7 +7,7 @@ import copy
 ## 4 for "Sehr gerne" 2 for "gerne"  0 for "egal" -2 for "nicht gerne" -6 for "gar nicht gerne"
 
 teams = 15
-projects = 15
+projects = 20
 Iterations = 10000
 treshold = 10
 constellation = []
@@ -126,6 +126,7 @@ def grouping():
     return lonely_people, new_groups, groups             
 
 def Assign():
+    teams = len(groups)    
     assignment = []
     while len(assignment) != teams: 
         current = np.random.randint (1,projects+1)
@@ -195,26 +196,25 @@ def solver(constellation):
             constellation = backup
     return constellation, epsilon_after
 
+
+
 def Iterate():
     epsilon_results = []
     constellation_results = []
     lonely_people, new_groups, groups = grouping()
-
+    print(len(groups))
     for i in range(trials): 
         constellation = Assign()
         const,epsil = solver(constellation)
         epsilon_results.append(epsil)
         constellation_results.append(const)
-    return max(epsilon_results), constellation_results[epsilon_results.index(max(epsilon_results))]
+    found_epsilon, found_constellation = max(epsilon_results), constellation_results[epsilon_results.index(max(epsilon_results))] 
+    return found_constellation, found_epsilon, new_groups
 
 
 print(Iterate())
+
 '''
-constellation = Assign()
-print(evaluate())
-print(grouping())
-
-
 print("Found Constellation: ", solver(constellation))
 print("Found Constellation: ", pooling(constellation))
 print("Calculated expected Value: ", max(epsilons_solver))

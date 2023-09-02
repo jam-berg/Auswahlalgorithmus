@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 Iterations = 2000
+trials = 200
 inputFileName = 'InputProjektePräferenz.csv'
 with open(inputFileName) as x:
     ncols = len(x.readline().split(','))
@@ -66,9 +67,26 @@ def solver(constellation):
     
         if epsilon_after > epsilon_before:
             constellation = backup
-    return constellation
+    return constellation, epsilon_after
 
-constellation = Assign()
+def Iterate():
+    epsilon_results = []
+    constellation_results = []
+    # lonely_people, new_groups, groups = grouping()
+    for i in range(trials): 
+        constellation = Assign()
+        const,epsil = solver(constellation)
+        epsilon_results.append(epsil)
+        constellation_results.append(const)
+    found_epsilon, found_constellation = max(epsilon_results), constellation_results[epsilon_results.index(max(epsilon_results))] 
+    return found_constellation, found_epsilon
+
+final_constellation, final_epsilon = Iterate()
+max_value = group_count*4 
+
+print("Found Constellation: {} with an expected Value of {} (theoretical maximum {})".format(final_constellation, final_epsilon, max_value) )
+
+'''
 
 print("Found Constellation: ", solver(constellation))
 print("Calculated expected Value: ", max(epsilons))
@@ -85,3 +103,5 @@ fig, ax = plt.subplots()
 plt.plot(epsilons,color = "pink", label = "solver")
 fig.legend()
 plt.show()
+
+'''
