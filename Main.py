@@ -2,31 +2,29 @@
 import numpy as np 
 import pandas as pd
 import matplotlib.pyplot as plt
+import csv
 
 Iterations = 2000
 trials = 200
-inputFileName = 'InputProjektePräferenz.csv'
-with open(inputFileName) as x:
-    ncols = len(x.readline().split(','))
+inputFileName = 'InputProjektePräferenz_old.csv'
+file_content = []
+with open(inputFileName, 'r') as csvfile:
+    csvreader = csv.reader(csvfile)
+    file_content = list(csvreader)
+project_names = file_content[0][2:]
+group_names = [row[1] for row in file_content[1:]]
+preferences = [[int(entry) for entry in row[2:]] for row in file_content[1:]]
+print(project_names)
+print(group_names)
+print(preferences)
+project_count = len(project_names)
+group_count = len(group_names)
 
-csv_file = pd.read_csv(inputFileName, usecols=range(1,ncols))
-groups = csv_file.iloc[:,:1]['Gruppe'].values.tolist()
-praeferenzen = csv_file.iloc[:, 1:]
-project_count= len(praeferenzen.columns)
-group_count = len(praeferenzen.index)
-projects = list(map(str, range(1,project_count+1)))
-
-groups_choice = []
-for index, row in praeferenzen.iterrows():
-    row_dict = dict(zip(projects, row))
-    groups_choice.append(row_dict)
-    
 epsilons = []
-
 def Assign():
     assignment = []
     while len(assignment) != group_count: 
-        current = np.random.randint (1,project_count+1)
+        current = np.random.randint (0,project_count)
         if not current in assignment: 
             assignment.append(current)
     return assignment 
@@ -34,9 +32,8 @@ def Assign():
 def Epsilon(listing):
     epsilon = 0
     for i in range(len(listing)):
-        epsilon += groups_choice[i][str(listing[i])]
+        epsilon += preferences[i][listing[i]]
     return epsilon
-
 
 def solver(constellation):
     for i in range(Iterations):
@@ -59,7 +56,7 @@ def solver(constellation):
         epsilon_before = Epsilon(backup)
         epsilons.append(epsilon_before)
 
-        rand = np.random.randint(1,project_count+1)
+        rand = np.random.randint(0,project_count)
         if not rand in backup:
             backup[np.random.randint(0,group_count)] = rand                 # replacing elements
 
@@ -82,26 +79,24 @@ def Iterate():
     return found_constellation, found_epsilon
 
 final_constellation, final_epsilon = Iterate()
-max_value = group_count*4 
+max_value = group_count*5 
 
 print("Found Constellation: {} with an expected Value of {} (theoretical maximum {})".format(final_constellation, final_epsilon, max_value) )
-
-'''
-
-print("Found Constellation: ", solver(constellation))
-print("Calculated expected Value: ", max(epsilons))
-print("highest theoretical Value: ", group_count*4)
+print("add +1 for project number")
 
 result_string = ""
-for i in range(len(constellation)):
-    result_string += "Gruppe " + groups[i] + " macht Projekt " + str(constellation[i]) + '\n'
-result_string += 'Zufriedenheitswert=' + str(max(epsilons))
+for i in range(len(final_constellation)):
+    result_string += "Gruppe " + group_names[i] + " macht " + project_names[final_constellation[i]] + '\n'
+result_string += 'Durchschnittlicher Zufriedenheitswert=' + str(final_epsilon/group_count)
+print(result_string)
 with open('resulting_constellation.txt', 'w') as f:
     f.write(result_string)
 
+'''
 fig, ax = plt.subplots()
 plt.plot(epsilons,color = "pink", label = "solver")
 fig.legend()
 plt.show()
-
 '''
+
+
