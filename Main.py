@@ -6,7 +6,7 @@ import csv
 
 Iterations = 2000
 trials = 200
-inputFileName = 'InputProjektePräferenz_old.csv'
+inputFileName = 'Preference Semesterprojekt (Responses) - Form Responses 1.csv'
 file_content = []
 with open(inputFileName, 'r') as csvfile:
     csvreader = csv.reader(csvfile)
